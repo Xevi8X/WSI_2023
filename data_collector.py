@@ -1,6 +1,7 @@
 import yfinance as yf
 import datetime as dt
 import sys
+import os
 
 
 def collect_data(resource_name, period_in_years=30, interval="1d"):
@@ -15,7 +16,13 @@ def collect_data(resource_name, period_in_years=30, interval="1d"):
     historical_data.to_csv(filename, mode="w+", columns=['Open', 'High', 'Low', 'Close', 'Volume'])
 
 
+def prepare_dir(dir_name):
+    if not os.path.exists(dir_name):
+        os.makedirs(dir_name)
+
+
 if __name__ == '__main__':
+    prepare_dir('datasets')
     for i, arg in enumerate(sys.argv):
         if i == 0:
             continue
