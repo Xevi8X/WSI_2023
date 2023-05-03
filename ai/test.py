@@ -56,8 +56,7 @@ def prepare_test_data(path, historyLength, lookupStep=1):
 
 def main():
     data = prepare_test_data("./datasets/hg=f.csv", 20, 1)
-    model = create_model(20, 5, 16, 256)
-    model.load_weights('./results/test3.h5')
+    model = tf.keras.models.load_model('./results/test3.h5')
     y_pred = model.predict(data['X_test'])
     data['Y_pred'] = y_pred
     plot_graph(data)
