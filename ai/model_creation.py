@@ -18,7 +18,7 @@ def create_model(nSequence, nFeatures, nLayers, units, dropout=0.3):
     model.add(Dropout(dropout))
     model.add(Dense(1, activation="linear"))
 
-    model.compile(loss="mean_absolute_error", metrics=["mean_absolute_error"], optimizer="Adam")
+    model.compile(loss="mean_squared_error", metrics=["mean_squared_error"], optimizer="Adam")
     return model
 
 
