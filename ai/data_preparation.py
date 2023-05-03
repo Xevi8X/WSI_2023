@@ -9,13 +9,25 @@ import numpy as np
 import pandas as pd
 import random
 
-def load_data(dataFileName, historyLength, lookupStep=1, testSize=0.2, shuffle=False):
+def load_data(dataFileName, historyLength, lookupStep=1, testSize=0.2, shuffle=False, scale=True):
     result = dict()
     features = ['Date', 'Open', 'High', 'Close', 'Low', 'Volume']
 
     df = pd.read_csv(dataFileName)
     result['df'] = df.copy()
     
+    if scale:
+        column_scaler = {}
+        # scale the data (prices) from 0 to 1
+        for column in features:
+            if column == 'Date':
+                continue
+            scaler = preprocessing.MinMaxScaler()
+            df[column] = scaler.fit_transform(np.expand_dims(df[column].values, axis=1))
+            column_scaler[column] = scaler
+        # add the MinMaxScaler instances to the result returned
+        result["column_scaler"] = column_scaler
+
     df['Future'] = df['Close'].shift(-lookupStep)
     df.dropna(inplace=True)
 

@@ -41,14 +41,14 @@ def main():
 
     data = load_data("./datasets/hg=f.csv", 20, shuffle=True)
     model = create_model(20, 5, 16, 256)
-    model_name = "test3"
+    model_name = "testUni"
     make_paths()
 
     checkpointer = ModelCheckpoint(os.path.join("results", model_name + ".h5"), save_best_only=True, verbose=1)
     tensorboard = TensorBoard(log_dir=os.path.join("logs", model_name))
     history = model.fit(data["X_train"], data["Y_train"],
                     batch_size=64,
-                    epochs=50,
+                    epochs=20,
                     validation_data=(data["X_test"], data["Y_test"]),
                     callbacks=[checkpointer, tensorboard],
                     verbose=1)
