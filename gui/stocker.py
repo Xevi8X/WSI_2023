@@ -3,7 +3,7 @@
 ################################################################################
 ## Form generated from reading UI file 'stocker.ui'
 ##
-## Created by: Qt User Interface Compiler version 6.2.4
+## Created by: Qt User Interface Compiler version 6.5.0
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
@@ -16,8 +16,9 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
 from PySide6.QtWidgets import (QApplication, QDateEdit, QGridLayout, QHBoxLayout,
-    QLabel, QLineEdit, QMainWindow, QPushButton,
-    QSizePolicy, QTabWidget, QVBoxLayout, QWidget)
+    QHeaderView, QLabel, QLineEdit, QMainWindow,
+    QPushButton, QSizePolicy, QTabWidget, QTableView,
+    QTextBrowser, QVBoxLayout, QWidget)
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -104,25 +105,6 @@ class Ui_MainWindow(object):
 
         self.verticalLayout.addLayout(self.horizontalLayout_8)
 
-        self.horizontalLayout_13 = QHBoxLayout()
-        self.horizontalLayout_13.setObjectName(u"horizontalLayout_13")
-        self.horizontalLayout_13.setContentsMargins(-1, -1, 50, -1)
-        self.label_20 = QLabel(self.widget)
-        self.label_20.setObjectName(u"label_20")
-        self.label_20.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
-
-        self.horizontalLayout_13.addWidget(self.label_20)
-
-        self.trainingNameLineEdit = QLineEdit(self.widget)
-        self.trainingNameLineEdit.setObjectName(u"trainingNameLineEdit")
-
-        self.horizontalLayout_13.addWidget(self.trainingNameLineEdit)
-
-        self.horizontalLayout_13.setStretch(0, 1)
-        self.horizontalLayout_13.setStretch(1, 2)
-
-        self.verticalLayout.addLayout(self.horizontalLayout_13)
-
         self.trainButton = QPushButton(self.widget)
         self.trainButton.setObjectName(u"trainButton")
         self.trainButton.setMinimumSize(QSize(0, 35))
@@ -130,11 +112,10 @@ class Ui_MainWindow(object):
 
         self.verticalLayout.addWidget(self.trainButton)
 
-        self.trainingStateLabel = QLabel(self.widget)
-        self.trainingStateLabel.setObjectName(u"trainingStateLabel")
-        self.trainingStateLabel.setAlignment(Qt.AlignCenter)
+        self.textBrowser = QTextBrowser(self.widget)
+        self.textBrowser.setObjectName(u"textBrowser")
 
-        self.verticalLayout.addWidget(self.trainingStateLabel)
+        self.verticalLayout.addWidget(self.textBrowser)
 
         self.tabWidget.addTab(self.widget, "")
         self.tab_2 = QWidget()
@@ -184,11 +165,10 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_3.addWidget(self.predictButton)
 
-        self.predictingResultLabel = QLabel(self.tab_2)
-        self.predictingResultLabel.setObjectName(u"predictingResultLabel")
-        self.predictingResultLabel.setAlignment(Qt.AlignCenter)
+        self.tabela = QTableView(self.tab_2)
+        self.tabela.setObjectName(u"tabela")
 
-        self.verticalLayout_3.addWidget(self.predictingResultLabel)
+        self.verticalLayout_3.addWidget(self.tabela)
 
         self.predictingWidget = QWidget(self.tab_2)
         self.predictingWidget.setObjectName(u"predictingWidget")
@@ -288,7 +268,7 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.tabWidget.setCurrentIndex(0)
+        self.tabWidget.setCurrentIndex(1)
 
 
         QMetaObject.connectSlotsByName(MainWindow)
@@ -300,15 +280,12 @@ class Ui_MainWindow(object):
         self.label_14.setText(QCoreApplication.translate("MainWindow", u"Stock name:", None))
         self.label.setText(QCoreApplication.translate("MainWindow", u"From:", None))
         self.label_15.setText(QCoreApplication.translate("MainWindow", u"To:", None))
-        self.label_20.setText(QCoreApplication.translate("MainWindow", u"Name:", None))
         self.trainButton.setText(QCoreApplication.translate("MainWindow", u"Train", None))
-        self.trainingStateLabel.setText(QCoreApplication.translate("MainWindow", u"State of trainig: uninitiated", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.widget), QCoreApplication.translate("MainWindow", u"Training", None))
-        self.label_11.setText(QCoreApplication.translate("MainWindow", u"Predicting value for the next day", None))
+        self.label_11.setText(QCoreApplication.translate("MainWindow", u"Predicting value for the next days", None))
         self.predictingChooseNNButton.setText(QCoreApplication.translate("MainWindow", u"Choose NN", None))
         self.label_3.setText(QCoreApplication.translate("MainWindow", u"Stock name:", None))
         self.predictButton.setText(QCoreApplication.translate("MainWindow", u"Predict", None))
-        self.predictingResultLabel.setText(QCoreApplication.translate("MainWindow", u"Predicted value: none", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), QCoreApplication.translate("MainWindow", u"Predicting", None))
         self.label_13.setText(QCoreApplication.translate("MainWindow", u"Trading simulation", None))
         self.label_4.setText(QCoreApplication.translate("MainWindow", u"Stock name:", None))

@@ -18,7 +18,7 @@
     <item>
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="widget">
        <attribute name="title">
@@ -115,26 +115,6 @@
          </layout>
         </item>
         <item>
-         <layout class="QHBoxLayout" name="horizontalLayout_13" stretch="1,2">
-          <property name="rightMargin">
-           <number>50</number>
-          </property>
-          <item>
-           <widget class="QLabel" name="label_20">
-            <property name="text">
-             <string>Name:</string>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QLineEdit" name="trainingNameLineEdit"/>
-          </item>
-         </layout>
-        </item>
-        <item>
          <widget class="QPushButton" name="trainButton">
           <property name="minimumSize">
            <size>
@@ -153,14 +133,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QLabel" name="trainingStateLabel">
-          <property name="text">
-           <string>State of trainig: uninitiated</string>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignCenter</set>
-          </property>
-         </widget>
+         <widget class="QTextBrowser" name="textBrowser"/>
         </item>
        </layout>
       </widget>
@@ -177,7 +150,7 @@
            </font>
           </property>
           <property name="text">
-           <string>Predicting value for the next day</string>
+           <string>Predicting value for the next days</string>
           </property>
           <property name="alignment">
            <set>Qt::AlignCenter</set>
@@ -236,14 +209,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QLabel" name="predictingResultLabel">
-          <property name="text">
-           <string>Predicted value: none</string>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignCenter</set>
-          </property>
-         </widget>
+         <widget class="QTableView" name="tabela"/>
         </item>
         <item>
          <widget class="QWidget" name="predictingWidget" native="true"/>
