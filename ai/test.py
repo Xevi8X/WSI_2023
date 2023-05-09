@@ -16,7 +16,9 @@ def plot_graph(test_df):
     # for i in range(len(test_df['Y_test'])):
     #     temp.append(abs(test_df['Y_pred'][i][0] - test_df['Y_test'][i]))
     
-    plt.subplot(1, 2, 1)
+    # plt.subplot(1, 2, 1)
+    # plt.plot(test_df['Y_test'][:-1], c='b')
+    # plt.plot(test_df['Y_pred'][1:], c='r')
     plt.plot(test_df['Y_test'], c='b')
     plt.plot(test_df['Y_pred'], c='r')
     plt.xlabel("Days")
@@ -68,8 +70,8 @@ def prepare_test_data(path, historyLength, lookupStep=1, scale=True):
     return result
 
 def main():
-    data = prepare_test_data("./datasets/si=f.csv", 20, 1)
-    model = tf.keras.models.load_model('./results/testUni.h5')
+    data = prepare_test_data("./datasets/hg=f.csv", 20, 1, 5)
+    model = tf.keras.models.load_model('./results/testGPU_XS_Long_LLR.h5')
     y_pred = model.predict(data['X_test'])
 
     y_test = np.squeeze(data["column_scaler"]["Close"].inverse_transform(np.expand_dims(data['Y_test'], axis=0)))
@@ -78,6 +80,7 @@ def main():
     data['Y_test'] = y_test
     data['Y_pred'] = y_pred
     plot_graph(data)
+    print(model.summary())
 
 if __name__ == "__main__":
     main()
