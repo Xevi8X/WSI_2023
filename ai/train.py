@@ -14,6 +14,7 @@ import random
 
 from data_preparation import load_data
 from model_creation import create_model, simple_model
+from constants import *
 
 def make_paths():
     if not os.path.isdir("results"):
@@ -48,16 +49,6 @@ def main():
     #         # Visible devices must be set before GPUs have been initialized
     #         print(e)
 
-    NUMBER_OF_DAYS = 20
-    NUMBER_OF_FEATURES = 5
-    LAYERS = 16
-    UNITS_PER_LAYER = 256
-    DATA_DIR = './datasets'
-    MULTIPLE_DATASETS = True
-    SHUFFLE = True
-    model_name = "testGPU_XS_Long_LLR"
-    LOOKUP_STEP = 5
-
     if MULTIPLE_DATASETS:
         files = os.listdir(DATA_DIR)
         data = load_data(os.path.join(DATA_DIR, files[0]), NUMBER_OF_DAYS, shuffle=SHUFFLE, lookupStep = LOOKUP_STEP)
@@ -77,8 +68,8 @@ def main():
     # model = create_model(NUMBER_OF_DAYS, NUMBER_OF_FEATURES, LAYERS, UNITS_PER_LAYER)
     make_paths()
 
-    checkpointer = ModelCheckpoint(os.path.join("results", model_name + ".h5"), save_best_only=True, verbose=1)
-    tensorboard = TensorBoard(log_dir=os.path.join("logs", model_name))
+    checkpointer = ModelCheckpoint(os.path.join("results", MODEL_NAME + ".h5"), save_best_only=True, verbose=1)
+    tensorboard = TensorBoard(log_dir=os.path.join("logs", MODEL_NAME))
     history = model.fit(data["X_train"], data["Y_train"],
                     batch_size=256,
                     epochs=50,
