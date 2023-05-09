@@ -1,7 +1,10 @@
 import sys
+from subprocess import Popen, PIPE
+import PySide6
 from PySide6.QtWidgets import QApplication, QMainWindow, QFileDialog
 from PySide6.QtCore import QFile
-from stocker import Ui_MainWindow
+from gui.stocker import Ui_MainWindow
+from data_collector import collect_data2
 
 class MainWindow(QMainWindow):
 
@@ -9,9 +12,22 @@ class MainWindow(QMainWindow):
         super(MainWindow, self).__init__()
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
-        self.ui.trainButton.clicked.connect(lambda _ : print("Y"))
+        self.ui.trainButton.clicked.connect(self.trainNN)
         self.ui.predictingChooseNNButton.clicked.connect(self.browseFiles)
 
+    def trainNN(self):
+        stock_name = self.ui.trainingStockLineEdit.text()
+        start = self.ui.trainingFromDateEdit.date().toString(format=PySide6.QtCore.Qt.DateFormat.ISODate)
+        end = self.ui.trainingToDateEdit.date().toString(format=PySide6.QtCore.Qt.DateFormat.ISODate)
+        epochNo = self.ui.trainEpochSpinBox.value()
+        filename = collect_data2(stock_name, start, end, interval="1d")
+        code = ['echo test']
+        process = Popen(code, stdout=PIPE)
+        line = process.stdout.readline()
+        while(line):
+            self.ui.trainingTextBrowser.append(line)
+            line = process.stdout.readline()
+        
     def browseFiles(self):
         fname=QFileDialog.getOpenFileName(self,'Open file', '.', '(*.h5)')
         self.ui.predictingChosenNNLineEdit.setText(fname[0])

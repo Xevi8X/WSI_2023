@@ -15,6 +15,15 @@ def collect_data(resource_name, period_in_years=30, interval="1d"):
     filename = f"datasets/{resource_name}.csv"
     historical_data.to_csv(filename, mode="w+", columns=['Open', 'High', 'Low', 'Close', 'Volume'])
 
+def collect_data2(resource_name, start, end, interval="1d") -> str:
+    resource = yf.Ticker(resource_name)
+
+    historical_data = resource.history(start=start, end=end, interval=interval)
+
+    filename = f"./data/{resource_name}_{start}_{end}.csv" 
+    historical_data.to_csv(filename, mode="w+", columns=['Open', 'High', 'Low', 'Close', 'Volume'])
+    return filename
+
 
 def prepare_dir(dir_name):
     if not os.path.exists(dir_name):

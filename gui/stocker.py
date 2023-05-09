@@ -17,8 +17,8 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QPalette, QPixmap, QRadialGradient, QTransform)
 from PySide6.QtWidgets import (QApplication, QDateEdit, QGridLayout, QHBoxLayout,
     QHeaderView, QLabel, QLineEdit, QMainWindow,
-    QPushButton, QSizePolicy, QTabWidget, QTableView,
-    QTextBrowser, QVBoxLayout, QWidget)
+    QPushButton, QSizePolicy, QSpinBox, QTabWidget,
+    QTableView, QTextBrowser, QVBoxLayout, QWidget)
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -105,6 +105,26 @@ class Ui_MainWindow(object):
 
         self.verticalLayout.addLayout(self.horizontalLayout_8)
 
+        self.horizontalLayout_9 = QHBoxLayout()
+        self.horizontalLayout_9.setObjectName(u"horizontalLayout_9")
+        self.horizontalLayout_9.setContentsMargins(-1, -1, 50, -1)
+        self.label_16 = QLabel(self.widget)
+        self.label_16.setObjectName(u"label_16")
+        self.label_16.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+
+        self.horizontalLayout_9.addWidget(self.label_16)
+
+        self.trainEpochSpinBox = QSpinBox(self.widget)
+        self.trainEpochSpinBox.setObjectName(u"trainEpochSpinBox")
+        self.trainEpochSpinBox.setEnabled(True)
+        self.trainEpochSpinBox.setMinimum(1)
+        self.trainEpochSpinBox.setValue(30)
+
+        self.horizontalLayout_9.addWidget(self.trainEpochSpinBox)
+
+
+        self.verticalLayout.addLayout(self.horizontalLayout_9)
+
         self.trainButton = QPushButton(self.widget)
         self.trainButton.setObjectName(u"trainButton")
         self.trainButton.setMinimumSize(QSize(0, 35))
@@ -112,10 +132,10 @@ class Ui_MainWindow(object):
 
         self.verticalLayout.addWidget(self.trainButton)
 
-        self.textBrowser = QTextBrowser(self.widget)
-        self.textBrowser.setObjectName(u"textBrowser")
+        self.trainingTextBrowser = QTextBrowser(self.widget)
+        self.trainingTextBrowser.setObjectName(u"trainingTextBrowser")
 
-        self.verticalLayout.addWidget(self.textBrowser)
+        self.verticalLayout.addWidget(self.trainingTextBrowser)
 
         self.tabWidget.addTab(self.widget, "")
         self.tab_2 = QWidget()
@@ -268,7 +288,7 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.tabWidget.setCurrentIndex(1)
+        self.tabWidget.setCurrentIndex(0)
 
 
         QMetaObject.connectSlotsByName(MainWindow)
@@ -280,6 +300,7 @@ class Ui_MainWindow(object):
         self.label_14.setText(QCoreApplication.translate("MainWindow", u"Stock name:", None))
         self.label.setText(QCoreApplication.translate("MainWindow", u"From:", None))
         self.label_15.setText(QCoreApplication.translate("MainWindow", u"To:", None))
+        self.label_16.setText(QCoreApplication.translate("MainWindow", u"Epoch:", None))
         self.trainButton.setText(QCoreApplication.translate("MainWindow", u"Train", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.widget), QCoreApplication.translate("MainWindow", u"Training", None))
         self.label_11.setText(QCoreApplication.translate("MainWindow", u"Predicting value for the next days", None))
