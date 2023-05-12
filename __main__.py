@@ -8,6 +8,8 @@ from data_collector import collect_data2
 
 class MainWindow(QMainWindow):
 
+    run: bool = False
+
     def __init__(self):
         super(MainWindow, self).__init__()
         self.ui = Ui_MainWindow()
@@ -16,16 +18,20 @@ class MainWindow(QMainWindow):
         self.ui.predictingChooseNNButton.clicked.connect(self.browseFiles)
 
     def trainNN(self):
+        if(self.run):
+            return
+        self.run = True
         stock_name = self.ui.trainingStockLineEdit.text()
         start = self.ui.trainingFromDateEdit.date().toString(format=PySide6.QtCore.Qt.DateFormat.ISODate)
         end = self.ui.trainingToDateEdit.date().toString(format=PySide6.QtCore.Qt.DateFormat.ISODate)
         epochNo = self.ui.trainEpochSpinBox.value()
         filename = collect_data2(stock_name, start, end, interval="1d")
-        process = Popen(['python', 'train.py'], stdout=PIPE,bufsize=1, universal_newlines=True)
+        process = Popen(['python', 'train.py', filename, str(epochNo)], stdout=PIPE,bufsize=1, universal_newlines=True)
         for line in iter(process.stdout.readline, ''):
-            print(line, end='')
-        
-
+            self.ui.trainingTextBrowser.append(line[:-1])
+            QApplication.processEvents()
+        self.run = False
+    
         
     def browseFiles(self):
         fname=QFileDialog.getOpenFileName(self,'Open file', '.', '(*.h5)')
