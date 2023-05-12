@@ -1,6 +1,7 @@
 from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import LSTM, Dense, Dropout
+from tensorflow.keras.layers import LSTM, Dense, Dropout, Bidirectional
 from tensorflow.keras.optimizers import Adam
+from tensorflow.keras.regularizers import L1
 from sklearn.model_selection import train_test_split
 
 def create_model(nSequence, nFeatures, nLayers, units, dropout=0.3):
@@ -27,6 +28,7 @@ def simple_model(nSequence, nFeatures, units, learningRate = 1e-3, dropout=0.3):
 
     model.add(LSTM(units, return_sequences=True, batch_input_shape=(None, nSequence, nFeatures)))
     model.add(LSTM(units, return_sequences=False))
+
     model.add(Dense(1, activation="linear"))
     model.compile(loss="mean_squared_error", metrics=["mean_squared_error"], optimizer=Adam(learning_rate=learningRate))
     return model

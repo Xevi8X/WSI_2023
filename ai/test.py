@@ -72,17 +72,17 @@ def prepare_test_data(path, historyLength, lookupStep=1, scale=True):
 
 def main():
     data = prepare_test_data("./datasets/GOOGL.csv", NUMBER_OF_DAYS, lookupStep = LOOKUP_STEP)
-    model = tf.keras.models.load_model('./results/testGPU_XS_Long_LLR.h5')
-    # model = tf.keras.models.load_model('./temp.h5')
+    model = tf.keras.models.load_model('./results/' + TESTED_MODEL + '.h5')
+    print(model.summary())
     y_pred = model.predict(data['X_test'])
 
     y_test = np.squeeze(data["column_scaler"]["Close"].inverse_transform(np.expand_dims(data['Y_test'], axis=0)))
+    print(y_pred)
     y_pred = np.squeeze(data["column_scaler"]["Close"].inverse_transform(y_pred))
 
     data['Y_test'] = y_test
     data['Y_pred'] = y_pred
     plot_graph(data)
-    print(model.summary())
 
 if __name__ == "__main__":
     main()

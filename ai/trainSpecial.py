@@ -11,7 +11,7 @@ from data_preparation import load_data
 def train_single_stock(stock_path: str, epoch_number: int, batch_size: int, output_model_path: str):
     data = load_data(stock_path, NUMBER_OF_DAYS, shuffle=SHUFFLE, lookupStep = LOOKUP_STEP)
 
-    model = tf.keras.models.load_model('./results/testGPU_XS_Long_LLR.h5')
+    model = tf.keras.models.load_model(FINAL_MODEL)
     make_paths()
     checkpointer = ModelCheckpoint(output_model_path, save_best_only=True, verbose=1)
     tensorboard = TensorBoard(log_dir=os.path.join("logs", MODEL_NAME))

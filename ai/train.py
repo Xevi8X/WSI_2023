@@ -64,15 +64,15 @@ def main():
     else:
         data = load_data("./datasets/hg=f.csv", NUMBER_OF_DAYS, shuffle=SHUFFLE, lookupStep = LOOKUP_STEP)
 
-    model = simple_model(NUMBER_OF_DAYS, NUMBER_OF_FEATURES, UNITS_PER_LAYER, learningRate=1e-4)
+    model = simple_model(NUMBER_OF_DAYS, NUMBER_OF_FEATURES, UNITS_PER_LAYER, learningRate=LEARNING_RATE)
     # model = create_model(NUMBER_OF_DAYS, NUMBER_OF_FEATURES, LAYERS, UNITS_PER_LAYER)
     make_paths()
 
     checkpointer = ModelCheckpoint(os.path.join("results", MODEL_NAME + ".h5"), save_best_only=True, verbose=1)
     tensorboard = TensorBoard(log_dir=os.path.join("logs", MODEL_NAME))
     history = model.fit(data["X_train"], data["Y_train"],
-                    batch_size=256,
-                    epochs=50,
+                    batch_size=BATCH_SIZE,
+                    epochs=EPOCHS,
                     validation_data=(data["X_test"], data["Y_test"]),
                     callbacks=[checkpointer, tensorboard],
                     verbose=1)
