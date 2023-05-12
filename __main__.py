@@ -1,10 +1,12 @@
 import sys
 from subprocess import Popen, PIPE
 import PySide6
-from PySide6.QtWidgets import QApplication, QMainWindow, QFileDialog
+from PySide6.QtWidgets import QApplication, QMainWindow, QFileDialog, QHBoxLayout
 from PySide6.QtCore import QFile
 from gui.stocker import Ui_MainWindow
 from data_collector import collect_data2
+from random import random
+from gui.myChart import MyChart
 
 class MainWindow(QMainWindow):
 
@@ -16,6 +18,7 @@ class MainWindow(QMainWindow):
         self.ui.setupUi(self)
         self.ui.trainButton.clicked.connect(self.trainNN)
         self.ui.predictingChooseNNButton.clicked.connect(self.browseFiles)
+        self.ui.predictButton.clicked.connect(self.predict)
 
     def trainNN(self):
         if(self.run):
@@ -36,6 +39,17 @@ class MainWindow(QMainWindow):
     def browseFiles(self):
         fname=QFileDialog.getOpenFileName(self,'Open file', '.', '(*.h5)')
         self.ui.predictingChosenNNLineEdit.setText(fname[0])
+
+    def predict(self):
+        stock_name = self.ui.predictingStockNameLineEdit.text()
+        nn_file = self.ui.predictingChosenNNLineEdit.text()
+
+        print(f"Predicting next days for {stock_name} based on model {nn_file}")
+        # values = predict(nn_file,stock_name)
+        values = [(random()-0.5)*1000.0 for _ in range(5)]
+
+        #Todo, wstawianie do tabli
+
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)

@@ -14,7 +14,8 @@ class MyChart(QChart):
 
     def addData(self, x: list[float] ,y: list[float], name: str):
         series = QLineSeries()
-        series.setName(name)
+        if str:
+            series.setName(name)
         assert(len(x) == len(y))
         for i in range(0,len(x)):
             series.append(x[i],y[i])
