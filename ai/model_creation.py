@@ -31,6 +31,7 @@ def simple_model(nSequence, nFeatures, units, learningRate = 1e-3, dropout=0.3):
 
     model.add(Dense(1, activation="linear"))
     model.compile(loss="mean_squared_error", metrics=["mean_squared_error"], optimizer=Adam(learning_rate=learningRate))
+    model.compile(loss="mean_absolute_error", metrics=["mean_squared_error"], optimizer=Adam(learning_rate=learningRate))
     return model
 
 # m = create_model(20, 5, 16, 256)
