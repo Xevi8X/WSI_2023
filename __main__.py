@@ -21,12 +21,11 @@ class MainWindow(QMainWindow):
         end = self.ui.trainingToDateEdit.date().toString(format=PySide6.QtCore.Qt.DateFormat.ISODate)
         epochNo = self.ui.trainEpochSpinBox.value()
         filename = collect_data2(stock_name, start, end, interval="1d")
-        code = ['echo test']
-        process = Popen(code, stdout=PIPE)
-        line = process.stdout.readline()
-        while(line):
-            self.ui.trainingTextBrowser.append(line)
-            line = process.stdout.readline()
+        process = Popen(['python', 'train.py'], stdout=PIPE,bufsize=1, universal_newlines=True)
+        for line in iter(process.stdout.readline, ''):
+            print(line, end='')
+        
+
         
     def browseFiles(self):
         fname=QFileDialog.getOpenFileName(self,'Open file', '.', '(*.h5)')
