@@ -1,7 +1,8 @@
 import sys
 from subprocess import Popen, PIPE
 import PySide6
-from PySide6.QtWidgets import QApplication, QMainWindow, QFileDialog, QHBoxLayout
+import datetime
+from PySide6.QtWidgets import QApplication, QMainWindow, QFileDialog, QHeaderView, QHBoxLayout, QTableWidgetItem
 from PySide6.QtCore import QFile
 from gui.stocker import Ui_MainWindow
 from data_collector import collect_data2
@@ -16,6 +17,7 @@ class MainWindow(QMainWindow):
         super(MainWindow, self).__init__()
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
+        self.setUpTable()
         self.ui.trainButton.clicked.connect(self.trainNN)
         self.ui.predictingChooseNNButton.clicked.connect(self.browseFiles)
         self.ui.predictButton.clicked.connect(self.predict)
@@ -40,6 +42,16 @@ class MainWindow(QMainWindow):
         fname=QFileDialog.getOpenFileName(self,'Open file', '.', '(*.h5)')
         self.ui.predictingChosenNNLineEdit.setText(fname[0])
 
+    def setUpTable(self):
+        self.ui.tabela.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
+        self.ui.tabela.horizontalHeader().setStretchLastSection(True)
+        width = int(self.ui.tabela.width() * 0.14)
+
+        for i in range(0, 5):
+            self.ui.tabela.setColumnWidth(i, width)
+
+
+
     def predict(self):
         stock_name = self.ui.predictingStockNameLineEdit.text()
         nn_file = self.ui.predictingChosenNNLineEdit.text()
@@ -48,7 +60,13 @@ class MainWindow(QMainWindow):
         # values = predict(nn_file,stock_name)
         values = [(random()-0.5)*1000.0 for _ in range(5)]
 
-        #Todo, wstawianie do tabli
+        today = datetime.datetime.now() + datetime.timedelta(days=1)
+        for i in range(0, 5):
+            self.ui.tabela.setHorizontalHeaderItem(i, QTableWidgetItem(str(today.day)+'/'+str(today.month)+'/'+str(today.year)))
+            today = today + datetime.timedelta(days=1)
+
+        for i in range(0, 5):
+            self.ui.tabela.setItem(0, i, QTableWidgetItem(str(values[i])))
 
 
 if __name__ == "__main__":
