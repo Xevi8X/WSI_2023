@@ -8,6 +8,7 @@ from gui.stocker import Ui_MainWindow
 from data_collector import collect_data2
 from random import random
 from gui.myChart import MyChart
+from ai.constants import *
 
 class MainWindow(QMainWindow):
 
@@ -32,7 +33,7 @@ class MainWindow(QMainWindow):
         end = self.ui.trainingToDateEdit.date().toString(format=PySide6.QtCore.Qt.DateFormat.ISODate)
         epochNo = self.ui.trainEpochSpinBox.value()
         filename = collect_data2(stock_name, start, end, interval="1d")
-        process = Popen(['python', 'train.py', filename, str(epochNo)], stdout=PIPE,bufsize=1, universal_newlines=True)
+        process = Popen(['python', 'ai/trainSpecial.py', filename, str(epochNo), str(BATCH_SIZE), f"{stock_name}_{start}_{end}.csv"], stdout=PIPE,bufsize=1, universal_newlines=True)
         for line in iter(process.stdout.readline, ''):
             self.ui.trainingTextBrowser.append(line[:-1])
             QApplication.processEvents()
