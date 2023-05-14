@@ -6,6 +6,7 @@ from sklearn import preprocessing
 import matplotlib.pyplot as plt
 
 from model_creation import create_model
+from constants import *
 
 def plot_graph(test_df):
     """
@@ -16,7 +17,9 @@ def plot_graph(test_df):
     # for i in range(len(test_df['Y_test'])):
     #     temp.append(abs(test_df['Y_pred'][i][0] - test_df['Y_test'][i]))
     
-    plt.subplot(1, 2, 1)
+    # # plt.subplot(1, 2, 1)
+    # plt.plot(test_df['Y_test'][:-1], c='b')
+    # plt.plot(test_df['Y_pred'][1:], c='r')
     plt.plot(test_df['Y_test'], c='b')
     plt.plot(test_df['Y_pred'], c='r')
     plt.xlabel("Days")
@@ -68,11 +71,13 @@ def prepare_test_data(path, historyLength, lookupStep=1, scale=True):
     return result
 
 def main():
-    data = prepare_test_data("./datasets/si=f.csv", 20, 1)
-    model = tf.keras.models.load_model('./results/testUni.h5')
+    data = prepare_test_data("./datasets/GOOGL.csv", NUMBER_OF_DAYS, lookupStep = LOOKUP_STEP)
+    model = tf.keras.models.load_model('./results/' + TESTED_MODEL + '.h5')
+    print(model.summary())
     y_pred = model.predict(data['X_test'])
 
     y_test = np.squeeze(data["column_scaler"]["Close"].inverse_transform(np.expand_dims(data['Y_test'], axis=0)))
+    print(y_pred)
     y_pred = np.squeeze(data["column_scaler"]["Close"].inverse_transform(y_pred))
 
     data['Y_test'] = y_test

@@ -30,7 +30,8 @@ def load_data(dataFileName, historyLength, lookupStep=1, testSize=0.2, shuffle=F
 
     df['Future'] = df['Close'].shift(-lookupStep)
     df.dropna(inplace=True)
-
+    # df['Future'] = df['Close'] / df['Future']
+    # print(df['Future'])
     sequence_data = []
     sequences = deque(maxlen=historyLength)
     for entry, target in zip(df[features].values, df['Future'].values):
