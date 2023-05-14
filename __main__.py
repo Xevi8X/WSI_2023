@@ -19,8 +19,9 @@ class MainWindow(QMainWindow):
         self.ui.setupUi(self)
         self.setUpTable()
         self.ui.trainButton.clicked.connect(self.trainNN)
-        self.ui.predictingChooseNNButton.clicked.connect(self.browseFiles)
+        self.ui.predictingChooseNNButton.clicked.connect(lambda: self.browseFiles(self.ui.predictingChosenNNLineEdit))
         self.ui.predictButton.clicked.connect(self.predict)
+        self.ui.simulationChooseNNButton.clicked.connect(lambda: self.browseFiles(self.ui.simulationChosenNNLineEdit))
 
     def trainNN(self):
         if(self.run):
@@ -38,9 +39,9 @@ class MainWindow(QMainWindow):
         self.run = False
     
         
-    def browseFiles(self):
+    def browseFiles(self, lineEdit):
         fname=QFileDialog.getOpenFileName(self,'Open file', '.', '(*.h5)')
-        self.ui.predictingChosenNNLineEdit.setText(fname[0])
+        lineEdit.setText(fname[0])
 
     def setUpTable(self):
         self.ui.tabela.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
