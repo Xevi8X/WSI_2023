@@ -1,4 +1,7 @@
 datasets/
+logs/
+results/
+data/
 
 # Created by .ignore support plugin (hsz.mobi)
 ### Python template
