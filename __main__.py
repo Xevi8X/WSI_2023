@@ -166,7 +166,7 @@ class MainWindow(QMainWindow):
         w1 = c1.toWidget()
         w2 = c2.toWidget()
         dialog = ResultDlg(final_money,int(100.0*(netto*final_money-money[0])/money[0]),w1,w2)
-        dialog.exec()
+        dialog.show()
 
         
 
