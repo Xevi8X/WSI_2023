@@ -396,11 +396,28 @@
             </property>
            </widget>
           </item>
-          <item row="2" column="1">
-           <widget class="QLineEdit" name="simulationStartMoneyLineEdit"/>
-          </item>
           <item row="3" column="1">
-           <widget class="QLineEdit" name="simulationTaxLineEdit"/>
+           <widget class="QDoubleSpinBox" name="simulationTaxSpinBox">
+            <property name="maximum">
+             <double>1.000000000000000</double>
+            </property>
+            <property name="singleStep">
+             <double>0.010000000000000</double>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QDoubleSpinBox" name="simulationStartMoney">
+            <property name="maximum">
+             <double>999999999.000000000000000</double>
+            </property>
+            <property name="singleStep">
+             <double>1000.000000000000000</double>
+            </property>
+            <property name="value">
+             <double>10000.000000000000000</double>
+            </property>
+           </widget>
           </item>
          </layout>
         </item>

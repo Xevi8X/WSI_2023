@@ -15,11 +15,11 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QDateEdit, QGridLayout, QHBoxLayout,
-    QHeaderView, QLabel, QLineEdit, QMainWindow,
-    QPushButton, QSizePolicy, QSpacerItem, QSpinBox,
-    QTabWidget, QTableWidget, QTableWidgetItem, QTextBrowser,
-    QVBoxLayout, QWidget)
+from PySide6.QtWidgets import (QApplication, QDateEdit, QDoubleSpinBox, QGridLayout,
+    QHBoxLayout, QHeaderView, QLabel, QLineEdit,
+    QMainWindow, QPushButton, QSizePolicy, QSpacerItem,
+    QSpinBox, QTabWidget, QTableWidget, QTableWidgetItem,
+    QTextBrowser, QVBoxLayout, QWidget)
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -277,15 +277,20 @@ class Ui_MainWindow(object):
 
         self.gridLayout_2.addWidget(self.label_6, 3, 0, 1, 1)
 
-        self.simulationStartMoneyLineEdit = QLineEdit(self.tab_3)
-        self.simulationStartMoneyLineEdit.setObjectName(u"simulationStartMoneyLineEdit")
+        self.simulationTaxSpinBox = QDoubleSpinBox(self.tab_3)
+        self.simulationTaxSpinBox.setObjectName(u"simulationTaxSpinBox")
+        self.simulationTaxSpinBox.setMaximum(1.000000000000000)
+        self.simulationTaxSpinBox.setSingleStep(0.010000000000000)
 
-        self.gridLayout_2.addWidget(self.simulationStartMoneyLineEdit, 2, 1, 1, 1)
+        self.gridLayout_2.addWidget(self.simulationTaxSpinBox, 3, 1, 1, 1)
 
-        self.simulationTaxLineEdit = QLineEdit(self.tab_3)
-        self.simulationTaxLineEdit.setObjectName(u"simulationTaxLineEdit")
+        self.simulationStartMoney = QDoubleSpinBox(self.tab_3)
+        self.simulationStartMoney.setObjectName(u"simulationStartMoney")
+        self.simulationStartMoney.setMaximum(999999999.000000000000000)
+        self.simulationStartMoney.setSingleStep(1000.000000000000000)
+        self.simulationStartMoney.setValue(10000.000000000000000)
 
-        self.gridLayout_2.addWidget(self.simulationTaxLineEdit, 3, 1, 1, 1)
+        self.gridLayout_2.addWidget(self.simulationStartMoney, 2, 1, 1, 1)
 
         self.gridLayout_2.setColumnStretch(0, 1)
 

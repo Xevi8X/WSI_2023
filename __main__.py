@@ -96,7 +96,7 @@ class MainWindow(QMainWindow):
         end = self.ui.simulationToDateEdit.date().toString(format=PySide6.QtCore.Qt.DateFormat.ISODate)
         filename = collect_data2(stock_name, start, end, interval="1d")
 
-        podatek = 0.0
+        podatek = self.ui.simulationTaxSpinBox.value()
         netto = 1.0 - podatek
 
         class ResultDlg(QDialog):
@@ -123,7 +123,7 @@ class MainWindow(QMainWindow):
         money = [0] * len(real)
         actions = [0] * len(real)
 
-        money[0] = float(self.ui.simulationStartMoneyLineEdit.text())
+        money[0] = self.ui.simulationStartMoney.value()
         actions[0] = 0
 
 
@@ -135,7 +135,7 @@ class MainWindow(QMainWindow):
                 money[i] =  money[i-1] - ammount_to_by*real[i-1]
                 actions[i] = actions[i-1] + ammount_to_by
             else:
-                money[i] = money[i-1] + netto*actions[i-1]*real[i-1]
+                money[i] = money[i-1] + actions[i-1]*real[i-1]
                 actions[i] = 0
                 # sprzedawaj
 
@@ -147,7 +147,7 @@ class MainWindow(QMainWindow):
         c2.addData(range(0,len(real)),actions,None)
         w1 = c1.toWidget()
         w2 = c2.toWidget()
-        dialog = ResultDlg(final_money,int(100.0*(final_money-money[0])/money[0]),w1,w2)
+        dialog = ResultDlg(final_money,int(100.0*(netto*final_money-money[0])/money[0]),w1,w2)
         dialog.exec()
 
         
