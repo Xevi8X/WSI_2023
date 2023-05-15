@@ -95,15 +95,17 @@ class MainWindow(QMainWindow):
 
         real, predict_val = predict(filename, nn_file, int(self.ui.simulationFromDateEdit.date().daysTo(self.ui.simulationToDateEdit.date())*5/7))
 
+        podatek = 1
+
         for i in range(1, len(real)):
             change = (predict_val[i]-real[i-1])/real[i-1]
             if(change> 0):
                 # kupuj
-                ammount_to_by = money//real[i-1]
-                money -= ammount_to_by*real[i-1]
+                ammount_to_by = money//(real[i-1] * (1/podatek))
+                money -= ammount_to_by*real[i-1] * (1/podatek)
                 actions += ammount_to_by
             else:
-                money += actions*real[i-1]
+                money += podatek * actions*real[i-1]
                 actions = 0
                 # sprzedawaj
 
