@@ -3,7 +3,7 @@
 ################################################################################
 ## Form generated from reading UI file 'stocker.ui'
 ##
-## Created by: Qt User Interface Compiler version 6.4.3
+## Created by: Qt User Interface Compiler version 6.5.0
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
@@ -15,11 +15,11 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QDateEdit, QDoubleSpinBox, QGridLayout,
-    QHBoxLayout, QHeaderView, QLabel, QLineEdit,
-    QMainWindow, QPushButton, QSizePolicy, QSpacerItem,
-    QSpinBox, QTabWidget, QTableWidget, QTableWidgetItem,
-    QTextBrowser, QVBoxLayout, QWidget)
+from PySide6.QtWidgets import (QApplication, QComboBox, QDateEdit, QDoubleSpinBox,
+    QGridLayout, QHBoxLayout, QHeaderView, QLabel,
+    QLineEdit, QMainWindow, QPushButton, QSizePolicy,
+    QSpacerItem, QSpinBox, QTabWidget, QTableWidget,
+    QTableWidgetItem, QTextBrowser, QVBoxLayout, QWidget)
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -249,21 +249,16 @@ class Ui_MainWindow(object):
 
         self.gridLayout_2.addWidget(self.simulationChosenNNLineEdit, 1, 1, 1, 1)
 
-        self.label_4 = QLabel(self.tab_3)
-        self.label_4.setObjectName(u"label_4")
-        self.label_4.setAlignment(Qt.AlignCenter)
-
-        self.gridLayout_2.addWidget(self.label_4, 0, 0, 1, 1)
-
         self.simulationChooseNNButton = QPushButton(self.tab_3)
         self.simulationChooseNNButton.setObjectName(u"simulationChooseNNButton")
 
         self.gridLayout_2.addWidget(self.simulationChooseNNButton, 1, 0, 1, 1)
 
-        self.simulationStockNameLineEdit = QLineEdit(self.tab_3)
-        self.simulationStockNameLineEdit.setObjectName(u"simulationStockNameLineEdit")
+        self.label_4 = QLabel(self.tab_3)
+        self.label_4.setObjectName(u"label_4")
+        self.label_4.setAlignment(Qt.AlignCenter)
 
-        self.gridLayout_2.addWidget(self.simulationStockNameLineEdit, 0, 1, 1, 1)
+        self.gridLayout_2.addWidget(self.label_4, 0, 0, 1, 1)
 
         self.label_5 = QLabel(self.tab_3)
         self.label_5.setObjectName(u"label_5")
@@ -271,11 +266,10 @@ class Ui_MainWindow(object):
 
         self.gridLayout_2.addWidget(self.label_5, 2, 0, 1, 1)
 
-        self.label_6 = QLabel(self.tab_3)
-        self.label_6.setObjectName(u"label_6")
-        self.label_6.setAlignment(Qt.AlignCenter)
+        self.simulationStockNameLineEdit = QLineEdit(self.tab_3)
+        self.simulationStockNameLineEdit.setObjectName(u"simulationStockNameLineEdit")
 
-        self.gridLayout_2.addWidget(self.label_6, 3, 0, 1, 1)
+        self.gridLayout_2.addWidget(self.simulationStockNameLineEdit, 0, 1, 1, 1)
 
         self.simulationTaxSpinBox = QDoubleSpinBox(self.tab_3)
         self.simulationTaxSpinBox.setObjectName(u"simulationTaxSpinBox")
@@ -284,6 +278,12 @@ class Ui_MainWindow(object):
 
         self.gridLayout_2.addWidget(self.simulationTaxSpinBox, 3, 1, 1, 1)
 
+        self.label_6 = QLabel(self.tab_3)
+        self.label_6.setObjectName(u"label_6")
+        self.label_6.setAlignment(Qt.AlignCenter)
+
+        self.gridLayout_2.addWidget(self.label_6, 3, 0, 1, 1)
+
         self.simulationStartMoney = QDoubleSpinBox(self.tab_3)
         self.simulationStartMoney.setObjectName(u"simulationStartMoney")
         self.simulationStartMoney.setMaximum(999999999.000000000000000)
@@ -291,6 +291,22 @@ class Ui_MainWindow(object):
         self.simulationStartMoney.setValue(10000.000000000000000)
 
         self.gridLayout_2.addWidget(self.simulationStartMoney, 2, 1, 1, 1)
+
+        self.label_7 = QLabel(self.tab_3)
+        self.label_7.setObjectName(u"label_7")
+        self.label_7.setAlignment(Qt.AlignCenter)
+
+        self.gridLayout_2.addWidget(self.label_7, 4, 0, 1, 1)
+
+        self.simulationActivationFuncComboBoxz = QComboBox(self.tab_3)
+        self.simulationActivationFuncComboBoxz.addItem("")
+        self.simulationActivationFuncComboBoxz.addItem("")
+        self.simulationActivationFuncComboBoxz.addItem("")
+        self.simulationActivationFuncComboBoxz.addItem("")
+        self.simulationActivationFuncComboBoxz.addItem("")
+        self.simulationActivationFuncComboBoxz.setObjectName(u"simulationActivationFuncComboBoxz")
+
+        self.gridLayout_2.addWidget(self.simulationActivationFuncComboBoxz, 4, 1, 1, 1)
 
         self.gridLayout_2.setColumnStretch(0, 1)
 
@@ -353,7 +369,7 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.tabWidget.setCurrentIndex(0)
+        self.tabWidget.setCurrentIndex(2)
 
 
         QMetaObject.connectSlotsByName(MainWindow)
@@ -389,10 +405,17 @@ class Ui_MainWindow(object):
 
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), QCoreApplication.translate("MainWindow", u"Predicting", None))
         self.label_13.setText(QCoreApplication.translate("MainWindow", u"Trading simulation", None))
-        self.label_4.setText(QCoreApplication.translate("MainWindow", u"Stock name:", None))
         self.simulationChooseNNButton.setText(QCoreApplication.translate("MainWindow", u"Choose NN", None))
+        self.label_4.setText(QCoreApplication.translate("MainWindow", u"Stock name:", None))
         self.label_5.setText(QCoreApplication.translate("MainWindow", u"Start money:", None))
         self.label_6.setText(QCoreApplication.translate("MainWindow", u"Tax", None))
+        self.label_7.setText(QCoreApplication.translate("MainWindow", u"Activation function", None))
+        self.simulationActivationFuncComboBoxz.setItemText(0, QCoreApplication.translate("MainWindow", u"Binary", None))
+        self.simulationActivationFuncComboBoxz.setItemText(1, QCoreApplication.translate("MainWindow", u"Tanh", None))
+        self.simulationActivationFuncComboBoxz.setItemText(2, QCoreApplication.translate("MainWindow", u"Sigmoid", None))
+        self.simulationActivationFuncComboBoxz.setItemText(3, QCoreApplication.translate("MainWindow", u"Modified Tanh", None))
+        self.simulationActivationFuncComboBoxz.setItemText(4, QCoreApplication.translate("MainWindow", u"Random", None))
+
         self.label_18.setText(QCoreApplication.translate("MainWindow", u"From:", None))
         self.label_19.setText(QCoreApplication.translate("MainWindow", u"To:", None))
         self.startSimulationButton.setText(QCoreApplication.translate("MainWindow", u"Start simulation", None))

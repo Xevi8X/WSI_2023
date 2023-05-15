@@ -97,6 +97,8 @@ class MainWindow(QMainWindow):
         end = self.ui.simulationToDateEdit.date().toString(format=PySide6.QtCore.Qt.DateFormat.ISODate)
         filename = collect_data2(stock_name, start, end, interval="1d")
 
+        activation = self.ui.simulationActivationFuncComboBoxz.setCurrentText
+
         podatek = self.ui.simulationTaxSpinBox.value()
         netto = 1.0 - podatek
 
@@ -127,11 +129,17 @@ class MainWindow(QMainWindow):
 
         money[0] = self.ui.simulationStartMoney.value()
 
-        # fun = mf.tanh
-        # fun = mf.sigmoid
-        # fun = mf.optimal
-        # fun = mf.binary
-        fun = mf.randomBinary
+        match activation:
+            case "Binary":
+                fun = mf.binary
+            case "Sigmoid":
+                fun = mf.sigmoid
+            case "Tanh":
+                fun = mf.tanh
+            case "Modified Tanh":
+                fun = mf.optimal
+            case "Random":
+                fun = mf.randomBinary
 
         for i in range(1, len(real)):
             change = (predict_val[i]-real[i - 1])/real[i - 1]

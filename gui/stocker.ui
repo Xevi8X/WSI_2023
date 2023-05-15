@@ -356,6 +356,13 @@
           <item row="1" column="1">
            <widget class="QLineEdit" name="simulationChosenNNLineEdit"/>
           </item>
+          <item row="1" column="0">
+           <widget class="QPushButton" name="simulationChooseNNButton">
+            <property name="text">
+             <string>Choose NN</string>
+            </property>
+           </widget>
+          </item>
           <item row="0" column="0">
            <widget class="QLabel" name="label_4">
             <property name="text">
@@ -365,16 +372,6 @@
              <set>Qt::AlignCenter</set>
             </property>
            </widget>
-          </item>
-          <item row="1" column="0">
-           <widget class="QPushButton" name="simulationChooseNNButton">
-            <property name="text">
-             <string>Choose NN</string>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="1">
-           <widget class="QLineEdit" name="simulationStockNameLineEdit"/>
           </item>
           <item row="2" column="0">
            <widget class="QLabel" name="label_5">
@@ -386,15 +383,8 @@
             </property>
            </widget>
           </item>
-          <item row="3" column="0">
-           <widget class="QLabel" name="label_6">
-            <property name="text">
-             <string>Tax</string>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignCenter</set>
-            </property>
-           </widget>
+          <item row="0" column="1">
+           <widget class="QLineEdit" name="simulationStockNameLineEdit"/>
           </item>
           <item row="3" column="1">
            <widget class="QDoubleSpinBox" name="simulationTaxSpinBox">
@@ -403,6 +393,16 @@
             </property>
             <property name="singleStep">
              <double>0.010000000000000</double>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="0">
+           <widget class="QLabel" name="label_6">
+            <property name="text">
+             <string>Tax</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
             </property>
            </widget>
           </item>
@@ -417,6 +417,45 @@
             <property name="value">
              <double>10000.000000000000000</double>
             </property>
+           </widget>
+          </item>
+          <item row="4" column="0">
+           <widget class="QLabel" name="label_7">
+            <property name="text">
+             <string>Activation function</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="1">
+           <widget class="QComboBox" name="simulationActivationFuncComboBoxz">
+            <item>
+             <property name="text">
+              <string>Binary</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Tanh</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Sigmoid</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Modified Tanh</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Random</string>
+             </property>
+            </item>
            </widget>
           </item>
          </layout>
