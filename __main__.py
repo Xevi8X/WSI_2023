@@ -116,11 +116,13 @@ class MainWindow(QMainWindow):
 
         real, predict_val = predict(filename, nn_file, int(self.ui.simulationFromDateEdit.date().daysTo(self.ui.simulationToDateEdit.date())*5/7))
 
+
         money = [0] * len(real)
         actions = [0] * len(real)
 
         money[0] = float(self.ui.simulationStartMoneyLineEdit.text())
         actions[0] = 0
+
 
         for i in range(1, len(real)):
             change = (predict_val[i]-real[i-1])/real[i-1]
