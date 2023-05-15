@@ -244,37 +244,48 @@ class Ui_MainWindow(object):
         self.gridLayout_2 = QGridLayout()
         self.gridLayout_2.setObjectName(u"gridLayout_2")
         self.gridLayout_2.setContentsMargins(50, -1, 50, -1)
+        self.simulationChosenNNLineEdit = QLineEdit(self.tab_3)
+        self.simulationChosenNNLineEdit.setObjectName(u"simulationChosenNNLineEdit")
+
+        self.gridLayout_2.addWidget(self.simulationChosenNNLineEdit, 1, 1, 1, 1)
+
+        self.label_4 = QLabel(self.tab_3)
+        self.label_4.setObjectName(u"label_4")
+        self.label_4.setAlignment(Qt.AlignCenter)
+
+        self.gridLayout_2.addWidget(self.label_4, 0, 0, 1, 1)
+
         self.simulationChooseNNButton = QPushButton(self.tab_3)
         self.simulationChooseNNButton.setObjectName(u"simulationChooseNNButton")
 
         self.gridLayout_2.addWidget(self.simulationChooseNNButton, 1, 0, 1, 1)
-
-        self.label_5 = QLabel(self.tab_3)
-        self.label_5.setObjectName(u"label_5")
-        self.label_5.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
-
-        self.gridLayout_2.addWidget(self.label_5, 2, 0, 1, 1)
-
-        self.label_4 = QLabel(self.tab_3)
-        self.label_4.setObjectName(u"label_4")
-        self.label_4.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
-
-        self.gridLayout_2.addWidget(self.label_4, 0, 0, 1, 1)
 
         self.simulationStockNameLineEdit = QLineEdit(self.tab_3)
         self.simulationStockNameLineEdit.setObjectName(u"simulationStockNameLineEdit")
 
         self.gridLayout_2.addWidget(self.simulationStockNameLineEdit, 0, 1, 1, 1)
 
-        self.simulationChosenNNLineEdit = QLineEdit(self.tab_3)
-        self.simulationChosenNNLineEdit.setObjectName(u"simulationChosenNNLineEdit")
+        self.label_5 = QLabel(self.tab_3)
+        self.label_5.setObjectName(u"label_5")
+        self.label_5.setAlignment(Qt.AlignCenter)
 
-        self.gridLayout_2.addWidget(self.simulationChosenNNLineEdit, 1, 1, 1, 1)
+        self.gridLayout_2.addWidget(self.label_5, 2, 0, 1, 1)
+
+        self.label_6 = QLabel(self.tab_3)
+        self.label_6.setObjectName(u"label_6")
+        self.label_6.setAlignment(Qt.AlignCenter)
+
+        self.gridLayout_2.addWidget(self.label_6, 3, 0, 1, 1)
 
         self.simulationStartMoneyLineEdit = QLineEdit(self.tab_3)
         self.simulationStartMoneyLineEdit.setObjectName(u"simulationStartMoneyLineEdit")
 
         self.gridLayout_2.addWidget(self.simulationStartMoneyLineEdit, 2, 1, 1, 1)
+
+        self.simulationTaxLineEdit = QLineEdit(self.tab_3)
+        self.simulationTaxLineEdit.setObjectName(u"simulationTaxLineEdit")
+
+        self.gridLayout_2.addWidget(self.simulationTaxLineEdit, 3, 1, 1, 1)
 
         self.gridLayout_2.setColumnStretch(0, 1)
 
@@ -285,7 +296,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout_11.setContentsMargins(50, -1, 50, -1)
         self.label_18 = QLabel(self.tab_3)
         self.label_18.setObjectName(u"label_18")
-        self.label_18.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+        self.label_18.setAlignment(Qt.AlignCenter)
 
         self.horizontalLayout_11.addWidget(self.label_18)
 
@@ -304,7 +315,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout_12.setContentsMargins(50, -1, 50, -1)
         self.label_19 = QLabel(self.tab_3)
         self.label_19.setObjectName(u"label_19")
-        self.label_19.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+        self.label_19.setAlignment(Qt.AlignCenter)
 
         self.horizontalLayout_12.addWidget(self.label_19)
 
@@ -337,7 +348,7 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.tabWidget.setCurrentIndex(0)
+        self.tabWidget.setCurrentIndex(2)
 
 
         QMetaObject.connectSlotsByName(MainWindow)
@@ -373,9 +384,10 @@ class Ui_MainWindow(object):
 
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), QCoreApplication.translate("MainWindow", u"Predicting", None))
         self.label_13.setText(QCoreApplication.translate("MainWindow", u"Trading simulation", None))
+        self.label_4.setText(QCoreApplication.translate("MainWindow", u"Stock name:", None))
         self.simulationChooseNNButton.setText(QCoreApplication.translate("MainWindow", u"Choose NN", None))
         self.label_5.setText(QCoreApplication.translate("MainWindow", u"Start money:", None))
-        self.label_4.setText(QCoreApplication.translate("MainWindow", u"Stock name:", None))
+        self.label_6.setText(QCoreApplication.translate("MainWindow", u"Tax", None))
         self.label_18.setText(QCoreApplication.translate("MainWindow", u"From:", None))
         self.label_19.setText(QCoreApplication.translate("MainWindow", u"To:", None))
         self.startSimulationButton.setText(QCoreApplication.translate("MainWindow", u"Start simulation", None))

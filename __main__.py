@@ -96,6 +96,9 @@ class MainWindow(QMainWindow):
         end = self.ui.simulationToDateEdit.date().toString(format=PySide6.QtCore.Qt.DateFormat.ISODate)
         filename = collect_data2(stock_name, start, end, interval="1d")
 
+        podatek = 0.0
+        netto = 1.0-podatek
+
         class ResultDlg(QDialog):
             def __init__(self,value,change: int,w1,w2, parent=None):
                 super().__init__(parent)
@@ -111,7 +114,7 @@ class MainWindow(QMainWindow):
                 self.ui.widget1.setLayout(l1)
                 l2 = QHBoxLayout()
                 l2.addWidget(w2)
-                self.ui.widget1.setLayout(l2)
+                self.ui.widget_2.setLayout(l2)
 
 
         real, predict_val = predict(filename, nn_file, int(self.ui.simulationFromDateEdit.date().daysTo(self.ui.simulationToDateEdit.date())*5/7))
@@ -132,14 +135,18 @@ class MainWindow(QMainWindow):
                 money[i] =  money[i-1] - ammount_to_by*real[i-1]
                 actions[i] = actions[i-1] + ammount_to_by
             else:
-                money[i] = money[i-1] + actions[i-1]*real[i-1]
+                money[i] = money[i-1] + netto*actions[i-1]*real[i-1]
                 actions[i] = 0
                 # sprzedawaj
 
         final_money = money[-1] + actions[-1]*real[-1]
         print(f"Final money: {final_money}")
-        w1 = QWidget()
-        w2 = QWidget()
+        c1 = MyChart("Money","Day","Money")
+        c1.addData(range(0,len(real)),money,None)
+        c2 = MyChart("Actions","Day","Ammount")
+        c2.addData(range(0,len(real)),actions,None)
+        w1 = c1.toWidget()
+        w2 = c2.toWidget()
         dialog = ResultDlg(final_money,int(100.0*(final_money-money[0])/money[0]),w1,w2)
         dialog.exec()
 

@@ -18,7 +18,7 @@
     <item>
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>0</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="widget">
        <attribute name="title">
@@ -353,22 +353,8 @@
           <property name="rightMargin">
            <number>50</number>
           </property>
-          <item row="1" column="0">
-           <widget class="QPushButton" name="simulationChooseNNButton">
-            <property name="text">
-             <string>Choose NN</string>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="0">
-           <widget class="QLabel" name="label_5">
-            <property name="text">
-             <string>Start money:</string>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-            </property>
-           </widget>
+          <item row="1" column="1">
+           <widget class="QLineEdit" name="simulationChosenNNLineEdit"/>
           </item>
           <item row="0" column="0">
            <widget class="QLabel" name="label_4">
@@ -376,18 +362,45 @@
              <string>Stock name:</string>
             </property>
             <property name="alignment">
-             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QPushButton" name="simulationChooseNNButton">
+            <property name="text">
+             <string>Choose NN</string>
             </property>
            </widget>
           </item>
           <item row="0" column="1">
            <widget class="QLineEdit" name="simulationStockNameLineEdit"/>
           </item>
-          <item row="1" column="1">
-           <widget class="QLineEdit" name="simulationChosenNNLineEdit"/>
+          <item row="2" column="0">
+           <widget class="QLabel" name="label_5">
+            <property name="text">
+             <string>Start money:</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="0">
+           <widget class="QLabel" name="label_6">
+            <property name="text">
+             <string>Tax</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
           </item>
           <item row="2" column="1">
            <widget class="QLineEdit" name="simulationStartMoneyLineEdit"/>
+          </item>
+          <item row="3" column="1">
+           <widget class="QLineEdit" name="simulationTaxLineEdit"/>
           </item>
          </layout>
         </item>
@@ -405,7 +418,7 @@
              <string>From:</string>
             </property>
             <property name="alignment">
-             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+             <set>Qt::AlignCenter</set>
             </property>
            </widget>
           </item>
@@ -428,7 +441,7 @@
              <string>To:</string>
             </property>
             <property name="alignment">
-             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+             <set>Qt::AlignCenter</set>
             </property>
            </widget>
           </item>
