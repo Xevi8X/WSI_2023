@@ -71,7 +71,7 @@ class MainWindow(QMainWindow):
         dates.append(str(historicalData.index[-1]).split(" ")[0])
         dates.append(str(datetime.datetime.now()).split(" ")[0])
 
-        value.append(predict_single(filename,nn_file))
+        value.append(predict_single(filename,nn_file)[0])
         for i in range(0,3):
             self.ui.tabela.setItem(0, i, QTableWidgetItem(str(dates[i])))
             self.ui.tabela.setItem(1, i, QTableWidgetItem(str(value[i])))
