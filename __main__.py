@@ -11,6 +11,7 @@ from gui.myChart import MyChart
 from ai.constants import *
 from ai.predictSingle import *
 from gui.results import *
+import money_functions as mf
 
 class MainWindow(QMainWindow):
 
@@ -126,18 +127,26 @@ class MainWindow(QMainWindow):
 
         money[0] = self.ui.simulationStartMoney.value()
 
+        # fun = mf.tanh
+        # fun = mf.sigmoid
+        # fun = mf.optimal
+        # fun = mf.binary
+        fun = mf.randomBinary
+
         for i in range(1, len(real)):
-            change = (predict_val[i]-real[i-1])/real[i-1]
+            change = (predict_val[i]-real[i - 1])/real[i - 1]
             if(change> 0):
                 # kupuj
-                ammount_to_by = money[i-1]//real[i-1]
-                money[i] =  money[i-1] - ammount_to_by*real[i-1]
-                actions[i] = actions[i-1] + ammount_to_by
+                ammount_to_by = int(abs(fun(change) * money[i - 1] / real[i - 1]))
+                money[i] =  money[i - 1] - ammount_to_by*real[i - 1]
+                actions[i] = actions[i - 1] + ammount_to_by
             else:
-                money[i] = money[i-1] + actions[i-1]*real[i-1]
-                actions[i] = 0
                 # sprzedawaj
-            total[i] = money[i] + actions[i]*real[i]
+                ammount_to_sell = int(abs(fun(change) * actions[i - 1]))
+                money[i] = money[i - 1] + ammount_to_sell * real[i - 1]
+                actions[i] = actions[i - 1] - ammount_to_sell
+            
+            total[i] = money[i] + actions[i] * real[i]
 
         final_money = money[-1] + actions[-1]*real[-1]
         print(f"Final money: {final_money}")
