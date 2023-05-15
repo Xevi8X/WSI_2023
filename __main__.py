@@ -97,7 +97,7 @@ class MainWindow(QMainWindow):
         filename = collect_data2(stock_name, start, end, interval="1d")
 
         podatek = 0.0
-        netto = 1.0-podatek
+        netto = 1.0 - podatek
 
         class ResultDlg(QDialog):
             def __init__(self,value,change: int,w1,w2, parent=None):
