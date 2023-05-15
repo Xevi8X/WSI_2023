@@ -64,14 +64,14 @@ class MainWindow(QMainWindow):
 
         print(f"Predicting next day for {filename} based on model {nn_file}")
         value = []
-        value[0] = historicalData.Close[-2]
-        value[1] = historicalData.Close[-1]
+        value.append(historicalData.Close[-2])
+        value.append(historicalData.Close[-1])
         dates = []
-        dates[0] = str(historicalData.index[-2]).split(" ")[0]
-        dates[1] = str(historicalData.index[-1]).split(" ")[0]
-        dates[2] = str(datetime.datetime.now())
+        dates.append(str(historicalData.index[-2]).split(" ")[0])
+        dates.append(str(historicalData.index[-1]).split(" ")[0])
+        dates.append(str(datetime.datetime.now()))
 
-        value[2] = predict_single(filename,nn_file)
+        value.append(predict_single(filename,nn_file))
         for i in range(0,3):
             self.ui.tabela.setItem(0, i, QTableWidgetItem(str(dates[i])))
             self.ui.tabela.setItem(1, i, QTableWidgetItem(str(value[i])))
