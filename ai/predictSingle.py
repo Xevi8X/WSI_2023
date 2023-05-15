@@ -12,6 +12,14 @@ def predict_single(stock_path: str, inputModelPath: str) -> list:
     y_pred = np.squeeze(data["column_scaler"]["Close"].inverse_transform(y_pred))
     return y_pred[-LOOKUP_STEP:]
 
+
+def predict(stock_path: str, inputModelPath: str, numberOfDays: int) -> list:
+    data = prepare_test_data(stock_path, NUMBER_OF_DAYS, LOOKUP_STEP)
+    model = tf.keras.models.load_model(inputModelPath)
+    y_pred = model.predict(data['X_test'])
+    y_pred = np.squeeze(data["column_scaler"]["Close"].inverse_transform(y_pred))
+    return y_pred[-numberOfDays:]
+
 if __name__ == "__main__":
     predict = predict_single(sys.argv[1], sys.argv[2])
     for i, pred in enumerate(predict):
