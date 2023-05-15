@@ -97,7 +97,7 @@ class MainWindow(QMainWindow):
         end = self.ui.simulationToDateEdit.date().toString(format=PySide6.QtCore.Qt.DateFormat.ISODate)
         filename = collect_data2(stock_name, start, end, interval="1d")
 
-        activation = self.ui.simulationActivationFuncComboBoxz.setCurrentText
+        activation = self.ui.simulationActivationFuncComboBoxz.currentText()
 
         podatek = self.ui.simulationTaxSpinBox.value()
         netto = 1.0 - podatek
@@ -162,7 +162,7 @@ class MainWindow(QMainWindow):
         c1.addData(range(0,len(real)),money,"Money")
         c1.addData(range(0,len(real)),total,"Total wallet")
         c2 = MyChart("Actions","Day","Ammount")
-        c2.addData(range(0,len(real)),actions,None)
+        c2.addData(range(0,len(real)),actions,"Stocks")
         w1 = c1.toWidget()
         w2 = c2.toWidget()
         dialog = ResultDlg(final_money,int(100.0*(netto*final_money-money[0])/money[0]),w1,w2)
