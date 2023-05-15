@@ -69,7 +69,7 @@ class MainWindow(QMainWindow):
         dates = []
         dates.append(str(historicalData.index[-2]).split(" ")[0])
         dates.append(str(historicalData.index[-1]).split(" ")[0])
-        dates.append(str(datetime.datetime.now()))
+        dates.append(str(datetime.datetime.now()).split(" ")[0])
 
         value.append(predict_single(filename,nn_file))
         for i in range(0,3):

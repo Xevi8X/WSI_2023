@@ -210,11 +210,17 @@ class Ui_MainWindow(object):
         self.tabela.setHorizontalHeaderItem(1, __qtablewidgetitem1)
         __qtablewidgetitem2 = QTableWidgetItem()
         self.tabela.setHorizontalHeaderItem(2, __qtablewidgetitem2)
-        if (self.tabela.rowCount() < 1):
-            self.tabela.setRowCount(1)
+        if (self.tabela.rowCount() < 2):
+            self.tabela.setRowCount(2)
         __qtablewidgetitem3 = QTableWidgetItem()
         self.tabela.setVerticalHeaderItem(0, __qtablewidgetitem3)
+        __qtablewidgetitem4 = QTableWidgetItem()
+        self.tabela.setVerticalHeaderItem(1, __qtablewidgetitem4)
+        __qtablewidgetitem5 = QTableWidgetItem()
+        __qtablewidgetitem5.setTextAlignment(Qt.AlignJustify|Qt.AlignVCenter);
+        self.tabela.setItem(0, 0, __qtablewidgetitem5)
         self.tabela.setObjectName(u"tabela")
+        self.tabela.horizontalHeader().setCascadingSectionResizes(False)
 
         self.verticalLayout_3.addWidget(self.tabela)
 
@@ -331,7 +337,7 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.tabWidget.setCurrentIndex(2)
+        self.tabWidget.setCurrentIndex(0)
 
 
         QMetaObject.connectSlotsByName(MainWindow)
@@ -356,6 +362,15 @@ class Ui_MainWindow(object):
         ___qtablewidgetitem1.setText(QCoreApplication.translate("MainWindow", u"Today", None));
         ___qtablewidgetitem2 = self.tabela.horizontalHeaderItem(2)
         ___qtablewidgetitem2.setText(QCoreApplication.translate("MainWindow", u"Next day", None));
+        ___qtablewidgetitem3 = self.tabela.verticalHeaderItem(0)
+        ___qtablewidgetitem3.setText(QCoreApplication.translate("MainWindow", u"Dates", None));
+        ___qtablewidgetitem4 = self.tabela.verticalHeaderItem(1)
+        ___qtablewidgetitem4.setText(QCoreApplication.translate("MainWindow", u"Values", None));
+
+        __sortingEnabled = self.tabela.isSortingEnabled()
+        self.tabela.setSortingEnabled(False)
+        self.tabela.setSortingEnabled(__sortingEnabled)
+
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), QCoreApplication.translate("MainWindow", u"Predicting", None))
         self.label_13.setText(QCoreApplication.translate("MainWindow", u"Trading simulation", None))
         self.simulationChooseNNButton.setText(QCoreApplication.translate("MainWindow", u"Choose NN", None))

@@ -18,7 +18,7 @@
     <item>
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>2</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="widget">
        <attribute name="title">
@@ -282,9 +282,17 @@
         </item>
         <item>
          <widget class="QTableWidget" name="tabela">
+          <attribute name="horizontalHeaderCascadingSectionResizes">
+           <bool>false</bool>
+          </attribute>
           <row>
            <property name="text">
-            <string/>
+            <string>Dates</string>
+           </property>
+          </row>
+          <row>
+           <property name="text">
+            <string>Values</string>
            </property>
           </row>
           <column>
@@ -302,6 +310,14 @@
             <string>Next day</string>
            </property>
           </column>
+          <item row="0" column="0">
+           <property name="text">
+            <string/>
+           </property>
+           <property name="textAlignment">
+            <set>AlignJustify|AlignVCenter</set>
+           </property>
+          </item>
          </widget>
         </item>
         <item>
