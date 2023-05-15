@@ -88,14 +88,28 @@ class MainWindow(QMainWindow):
         stock_name = self.ui.simulationStockNameLineEdit.text()
         nn_file = self.ui.simulationChosenNNLineEdit.text()
         money = float(self.ui.simulationStartMoneyLineEdit.text())
+        actions = 0
         start = self.ui.simulationFromDateEdit.date().addDays(-70).toString(format=PySide6.QtCore.Qt.DateFormat.ISODate)
         end = self.ui.simulationToDateEdit.date().toString(format=PySide6.QtCore.Qt.DateFormat.ISODate)
         filename = collect_data2(stock_name, start, end, interval="1d")
 
         real, predict_val = predict(filename, nn_file, int(self.ui.simulationFromDateEdit.date().daysTo(self.ui.simulationToDateEdit.date())*5/7))
 
-        for i in range(len(real)):
-            print(f"{real}:{predict_val}")
+        for i in range(1, len(real)):
+            change = (predict_val[i]-real[i-1])/real[i-1]
+            if(change> 0):
+                # kupuj
+                ammount_to_by = money//real[i-1]
+                money -= ammount_to_by*real[i-1]
+                actions += ammount_to_by
+            else:
+                money += actions*real[i-1]
+                actions = 0
+                # sprzedawaj
+
+        money += actions*real[-1]
+        actions = 0
+        print(f"Final money: {money}")
 
         
 
