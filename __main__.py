@@ -10,6 +10,7 @@ from random import random
 from gui.myChart import MyChart
 from ai.constants import *
 from ai.predictSingle import *
+from gui.results import *
 
 class MainWindow(QMainWindow):
 
@@ -77,6 +78,7 @@ class MainWindow(QMainWindow):
             self.ui.tabela.setItem(0, i, QTableWidgetItem(str(dates[i])))
             self.ui.tabela.setItem(1, i, QTableWidgetItem(str(value[i])))
 
+
         # for i in range(0, 1):
         #     self.ui.tabela.setHorizontalHeaderItem(i, QTableWidgetItem(str(today.day)+'/'+str(today.month)+'/'+str(today.year)))
         #     today = today + datetime.timedelta(days=1)
@@ -84,32 +86,60 @@ class MainWindow(QMainWindow):
         # for i in range(0, 1):
         #     self.ui.tabela.setItem(0, i, QTableWidgetItem(str(values[i])))
 
+
+
     def simulation(self):
         stock_name = self.ui.simulationStockNameLineEdit.text()
         nn_file = self.ui.simulationChosenNNLineEdit.text()
-        money = float(self.ui.simulationStartMoneyLineEdit.text())
-        actions = 0
+
         start = self.ui.simulationFromDateEdit.date().addDays(-70).toString(format=PySide6.QtCore.Qt.DateFormat.ISODate)
         end = self.ui.simulationToDateEdit.date().toString(format=PySide6.QtCore.Qt.DateFormat.ISODate)
         filename = collect_data2(stock_name, start, end, interval="1d")
 
+        class ResultDlg(QDialog):
+            def __init__(self,value,change: int,w1,w2, parent=None):
+                super().__init__(parent)
+                # Create an instance of the GUI
+                self.ui = Ui_Dialog()
+                # Run the .setupUi() method to show the GUI
+                self.ui.setupUi(self)
+
+                self.ui.result1Label.setText(f"Total money: {value}")
+                self.ui.result2Label.setText(f"Change: {change}%")
+                l1 = QHBoxLayout()
+                l1.addWidget(w1)
+                self.ui.widget1.setLayout(l1)
+                l2 = QHBoxLayout()
+                l2.addWidget(w2)
+                self.ui.widget1.setLayout(l2)
+
+
         real, predict_val = predict(filename, nn_file, int(self.ui.simulationFromDateEdit.date().daysTo(self.ui.simulationToDateEdit.date())*5/7))
+
+        money = [0] * len(real)
+        actions = [0] * len(real)
+
+        money[0] = float(self.ui.simulationStartMoneyLineEdit.text())
+        actions[0] = 0
 
         for i in range(1, len(real)):
             change = (predict_val[i]-real[i-1])/real[i-1]
             if(change> 0):
                 # kupuj
-                ammount_to_by = money//real[i-1]
-                money -= ammount_to_by*real[i-1]
-                actions += ammount_to_by
+                ammount_to_by = money[i-1]//real[i-1]
+                money[i] =  money[i-1] - ammount_to_by*real[i-1]
+                actions[i] = actions[i-1] + ammount_to_by
             else:
-                money += actions*real[i-1]
-                actions = 0
+                money[i] = money[i-1] + actions[i-1]*real[i-1]
+                actions[i] = 0
                 # sprzedawaj
 
-        money += actions*real[-1]
-        actions = 0
-        print(f"Final money: {money}")
+        final_money = money[-1] + actions[-1]*real[-1]
+        print(f"Final money: {final_money}")
+        w1 = QWidget()
+        w2 = QWidget()
+        dialog = ResultDlg(final_money,int(100.0*(final_money-money[0])/money[0]),w1,w2)
+        dialog.exec()
 
         
 
