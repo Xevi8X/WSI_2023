@@ -118,6 +118,7 @@ class MainWindow(QMainWindow):
                 l2 = QHBoxLayout()
                 l2.addWidget(w2)
                 self.ui.widget_2.setLayout(l2)
+                self.setWindowModality(Qt.WindowModality.NonModal)
 
 
         real, predict_val = predict(filename, nn_file, int(self.ui.simulationFromDateEdit.date().daysTo(self.ui.simulationToDateEdit.date())*5/7))
