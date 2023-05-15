@@ -122,10 +122,9 @@ class MainWindow(QMainWindow):
 
         money = [0] * len(real)
         actions = [0] * len(real)
+        total = [0] * len(real)
 
         money[0] = self.ui.simulationStartMoney.value()
-        actions[0] = 0
-
 
         for i in range(1, len(real)):
             change = (predict_val[i]-real[i-1])/real[i-1]
@@ -138,11 +137,13 @@ class MainWindow(QMainWindow):
                 money[i] = money[i-1] + actions[i-1]*real[i-1]
                 actions[i] = 0
                 # sprzedawaj
+            total[i] = money[i] + actions[i]*real[i]
 
         final_money = money[-1] + actions[-1]*real[-1]
         print(f"Final money: {final_money}")
         c1 = MyChart("Money","Day","Money")
-        c1.addData(range(0,len(real)),money,None)
+        c1.addData(range(0,len(real)),money,"Money")
+        c1.addData(range(0,len(real)),total,"Total wallet")
         c2 = MyChart("Actions","Day","Ammount")
         c2.addData(range(0,len(real)),actions,None)
         w1 = c1.toWidget()
