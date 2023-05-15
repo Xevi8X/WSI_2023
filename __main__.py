@@ -9,7 +9,7 @@ from data_collector import *
 from random import random
 from gui.myChart import MyChart
 from ai.constants import *
-from ai.predictSingle import predict_single
+from ai.predictSingle import *
 
 class MainWindow(QMainWindow):
 
@@ -91,6 +91,13 @@ class MainWindow(QMainWindow):
         start = self.ui.simulationFromDateEdit.date().addDays(-70).toString(format=PySide6.QtCore.Qt.DateFormat.ISODate)
         end = self.ui.simulationToDateEdit.date().toString(format=PySide6.QtCore.Qt.DateFormat.ISODate)
         filename = collect_data2(stock_name, start, end, interval="1d")
+
+        real, predict_val = predict(filename, nn_file, int(self.ui.simulationFromDateEdit.date().daysTo(self.ui.simulationToDateEdit.date())*5/7))
+
+        for i in range(len(real)):
+            print(f"{real}:{predict_val}")
+
+        
 
 
 
