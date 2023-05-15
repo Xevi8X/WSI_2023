@@ -9,6 +9,7 @@ from data_collector import collect_data2
 from random import random
 from gui.myChart import MyChart
 from ai.constants import *
+from ai.predictSingle import predict_single
 
 class MainWindow(QMainWindow):
 
@@ -33,7 +34,7 @@ class MainWindow(QMainWindow):
         end = self.ui.trainingToDateEdit.date().toString(format=PySide6.QtCore.Qt.DateFormat.ISODate)
         epochNo = self.ui.trainEpochSpinBox.value()
         filename = collect_data2(stock_name, start, end, interval="1d")
-        process = Popen(['python', 'ai/trainSpecial.py', filename, str(epochNo), str(BATCH_SIZE), f"{stock_name}_{start}_{end}.csv"], stdout=PIPE,bufsize=1, universal_newlines=True)
+        process = Popen(['python3', 'ai/trainSpecial.py', filename, str(epochNo), str(BATCH_SIZE), f"{stock_name}_{start}_{end}.h5"], stdout=PIPE,bufsize=1, universal_newlines=True)
         for line in iter(process.stdout.readline, ''):
             self.ui.trainingTextBrowser.append(line[:-1])
             QApplication.processEvents()
@@ -58,16 +59,18 @@ class MainWindow(QMainWindow):
         stock_name = self.ui.predictingStockNameLineEdit.text()
         nn_file = self.ui.predictingChosenNNLineEdit.text()
 
-        print(f"Predicting next days for {stock_name} based on model {nn_file}")
-        # values = predict(nn_file,stock_name)
-        values = [(random()-0.5)*1000.0 for _ in range(5)]
+        filename = collect_data2(stock_name, datetime.datetime.now() - datetime.timedelta(days=70), datetime.datetime.now(), interval="1d")
+
+        print(f"Predicting next days for {filename} based on model {nn_file}")
+        values = [predict_single(filename,nn_file)]
+        #values = [(random()-0.5)*1000.0 for _ in range(5)]
 
         today = datetime.datetime.now() + datetime.timedelta(days=1)
-        for i in range(0, 5):
+        for i in range(0, 1):
             self.ui.tabela.setHorizontalHeaderItem(i, QTableWidgetItem(str(today.day)+'/'+str(today.month)+'/'+str(today.year)))
             today = today + datetime.timedelta(days=1)
 
-        for i in range(0, 5):
+        for i in range(0, 1):
             self.ui.tabela.setItem(0, i, QTableWidgetItem(str(values[i])))
 
 

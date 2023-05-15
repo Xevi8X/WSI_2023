@@ -5,8 +5,8 @@ from collections import deque
 from sklearn import preprocessing
 import matplotlib.pyplot as plt
 
-from model_creation import create_model
-from constants import *
+from ai.model_creation import create_model
+from ai.constants import *
 
 def plot_graph(test_df):
     """

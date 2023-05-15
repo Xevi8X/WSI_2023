@@ -9,6 +9,6 @@ MODEL_NAME = "absoluteModel"
 TESTED_MODEL = "absoluteModel"
 LOOKUP_STEP = 1
 LEARNING_RATE = 5e-4
-FINAL_MODEL = "./results/finalModel.h5"
+FINAL_MODEL = "./ai/results/finalModel.h5"
 BATCH_SIZE = 256
 EPOCHS = 100

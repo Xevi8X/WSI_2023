@@ -2,8 +2,8 @@ import sys
 import tensorflow as tf
 import numpy as np
 
-from constants import *
-from test import prepare_test_data
+from ai.constants import *
+from ai.test import prepare_test_data
 
 def predict_single(stock_path: str, inputModelPath: str) -> list:
     data = prepare_test_data(stock_path, NUMBER_OF_DAYS, LOOKUP_STEP)
