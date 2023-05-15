@@ -24,6 +24,7 @@ class MainWindow(QMainWindow):
         self.ui.predictingChooseNNButton.clicked.connect(lambda: self.browseFiles(self.ui.predictingChosenNNLineEdit))
         self.ui.predictButton.clicked.connect(self.predict)
         self.ui.simulationChooseNNButton.clicked.connect(lambda: self.browseFiles(self.ui.simulationChosenNNLineEdit))
+        self.ui.startSimulationButton.clicked.connect(self.simulation)
 
     def trainNN(self):
         if(self.run):
@@ -82,6 +83,15 @@ class MainWindow(QMainWindow):
 
         # for i in range(0, 1):
         #     self.ui.tabela.setItem(0, i, QTableWidgetItem(str(values[i])))
+
+    def simulation(self):
+        stock_name = self.ui.simulationStockNameLineEdit.text()
+        nn_file = self.ui.simulationChosenNNLineEdit.text()
+        money = float(self.ui.simulationStartMoneyLineEdit.text())
+        start = self.ui.simulationFromDateEdit.date().addDays(-70).toString(format=PySide6.QtCore.Qt.DateFormat.ISODate)
+        end = self.ui.simulationToDateEdit.date().toString(format=PySide6.QtCore.Qt.DateFormat.ISODate)
+        filename = collect_data2(stock_name, start, end, interval="1d")
+
 
 
 if __name__ == "__main__":
