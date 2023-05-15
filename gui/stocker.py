@@ -3,7 +3,7 @@
 ################################################################################
 ## Form generated from reading UI file 'stocker.ui'
 ##
-## Created by: Qt User Interface Compiler version 6.2.4
+## Created by: Qt User Interface Compiler version 6.4.3
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
@@ -202,22 +202,18 @@ class Ui_MainWindow(object):
         self.verticalLayout_3.addItem(self.verticalSpacer)
 
         self.tabela = QTableWidget(self.tab_2)
-        if (self.tabela.columnCount() < 5):
-            self.tabela.setColumnCount(5)
+        if (self.tabela.columnCount() < 3):
+            self.tabela.setColumnCount(3)
         __qtablewidgetitem = QTableWidgetItem()
         self.tabela.setHorizontalHeaderItem(0, __qtablewidgetitem)
         __qtablewidgetitem1 = QTableWidgetItem()
         self.tabela.setHorizontalHeaderItem(1, __qtablewidgetitem1)
         __qtablewidgetitem2 = QTableWidgetItem()
         self.tabela.setHorizontalHeaderItem(2, __qtablewidgetitem2)
-        __qtablewidgetitem3 = QTableWidgetItem()
-        self.tabela.setHorizontalHeaderItem(3, __qtablewidgetitem3)
-        __qtablewidgetitem4 = QTableWidgetItem()
-        self.tabela.setHorizontalHeaderItem(4, __qtablewidgetitem4)
         if (self.tabela.rowCount() < 1):
             self.tabela.setRowCount(1)
-        __qtablewidgetitem5 = QTableWidgetItem()
-        self.tabela.setVerticalHeaderItem(0, __qtablewidgetitem5)
+        __qtablewidgetitem3 = QTableWidgetItem()
+        self.tabela.setVerticalHeaderItem(0, __qtablewidgetitem3)
         self.tabela.setObjectName(u"tabela")
 
         self.verticalLayout_3.addWidget(self.tabela)
@@ -242,29 +238,39 @@ class Ui_MainWindow(object):
         self.gridLayout_2 = QGridLayout()
         self.gridLayout_2.setObjectName(u"gridLayout_2")
         self.gridLayout_2.setContentsMargins(50, -1, 50, -1)
+        self.simulationChooseNNButton = QPushButton(self.tab_3)
+        self.simulationChooseNNButton.setObjectName(u"simulationChooseNNButton")
+
+        self.gridLayout_2.addWidget(self.simulationChooseNNButton, 1, 0, 1, 1)
+
+        self.label_5 = QLabel(self.tab_3)
+        self.label_5.setObjectName(u"label_5")
+        self.label_5.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+
+        self.gridLayout_2.addWidget(self.label_5, 2, 0, 1, 1)
+
         self.label_4 = QLabel(self.tab_3)
         self.label_4.setObjectName(u"label_4")
         self.label_4.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
 
         self.gridLayout_2.addWidget(self.label_4, 0, 0, 1, 1)
 
-        self.simulationChooseNNButton = QPushButton(self.tab_3)
-        self.simulationChooseNNButton.setObjectName(u"simulationChooseNNButton")
+        self.simulationStockNameLineEdit = QLineEdit(self.tab_3)
+        self.simulationStockNameLineEdit.setObjectName(u"simulationStockNameLineEdit")
 
-        self.gridLayout_2.addWidget(self.simulationChooseNNButton, 1, 0, 1, 1)
+        self.gridLayout_2.addWidget(self.simulationStockNameLineEdit, 0, 1, 1, 1)
 
         self.simulationChosenNNLineEdit = QLineEdit(self.tab_3)
         self.simulationChosenNNLineEdit.setObjectName(u"simulationChosenNNLineEdit")
 
         self.gridLayout_2.addWidget(self.simulationChosenNNLineEdit, 1, 1, 1, 1)
 
-        self.simulationStockNameLineEdit = QLineEdit(self.tab_3)
-        self.simulationStockNameLineEdit.setObjectName(u"simulationStockNameLineEdit")
+        self.simulationStartMoneyLineEdit = QLineEdit(self.tab_3)
+        self.simulationStartMoneyLineEdit.setObjectName(u"simulationStartMoneyLineEdit")
 
-        self.gridLayout_2.addWidget(self.simulationStockNameLineEdit, 0, 1, 1, 1)
+        self.gridLayout_2.addWidget(self.simulationStartMoneyLineEdit, 2, 1, 1, 1)
 
         self.gridLayout_2.setColumnStretch(0, 1)
-        self.gridLayout_2.setColumnStretch(1, 2)
 
         self.verticalLayout_4.addLayout(self.gridLayout_2)
 
@@ -307,6 +313,11 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_4.addLayout(self.horizontalLayout_12)
 
+        self.startSimulationButton = QPushButton(self.tab_3)
+        self.startSimulationButton.setObjectName(u"startSimulationButton")
+
+        self.verticalLayout_4.addWidget(self.startSimulationButton)
+
         self.simulationWidget = QWidget(self.tab_3)
         self.simulationWidget.setObjectName(u"simulationWidget")
 
@@ -320,7 +331,7 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.tabWidget.setCurrentIndex(0)
+        self.tabWidget.setCurrentIndex(2)
 
 
         QMetaObject.connectSlotsByName(MainWindow)
@@ -340,21 +351,19 @@ class Ui_MainWindow(object):
         self.label_3.setText(QCoreApplication.translate("MainWindow", u"Stock name:", None))
         self.predictButton.setText(QCoreApplication.translate("MainWindow", u"Predict", None))
         ___qtablewidgetitem = self.tabela.horizontalHeaderItem(0)
-        ___qtablewidgetitem.setText(QCoreApplication.translate("MainWindow", u"Day 1", None));
+        ___qtablewidgetitem.setText(QCoreApplication.translate("MainWindow", u"Yesterday", None));
         ___qtablewidgetitem1 = self.tabela.horizontalHeaderItem(1)
-        ___qtablewidgetitem1.setText(QCoreApplication.translate("MainWindow", u"Day 2", None));
+        ___qtablewidgetitem1.setText(QCoreApplication.translate("MainWindow", u"Today", None));
         ___qtablewidgetitem2 = self.tabela.horizontalHeaderItem(2)
-        ___qtablewidgetitem2.setText(QCoreApplication.translate("MainWindow", u"Day 3", None));
-        ___qtablewidgetitem3 = self.tabela.horizontalHeaderItem(3)
-        ___qtablewidgetitem3.setText(QCoreApplication.translate("MainWindow", u"Day 4", None));
-        ___qtablewidgetitem4 = self.tabela.horizontalHeaderItem(4)
-        ___qtablewidgetitem4.setText(QCoreApplication.translate("MainWindow", u"Day 5", None));
+        ___qtablewidgetitem2.setText(QCoreApplication.translate("MainWindow", u"Next day", None));
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), QCoreApplication.translate("MainWindow", u"Predicting", None))
         self.label_13.setText(QCoreApplication.translate("MainWindow", u"Trading simulation", None))
-        self.label_4.setText(QCoreApplication.translate("MainWindow", u"Stock name:", None))
         self.simulationChooseNNButton.setText(QCoreApplication.translate("MainWindow", u"Choose NN", None))
+        self.label_5.setText(QCoreApplication.translate("MainWindow", u"Start money:", None))
+        self.label_4.setText(QCoreApplication.translate("MainWindow", u"Stock name:", None))
         self.label_18.setText(QCoreApplication.translate("MainWindow", u"From:", None))
         self.label_19.setText(QCoreApplication.translate("MainWindow", u"To:", None))
+        self.startSimulationButton.setText(QCoreApplication.translate("MainWindow", u"Start simulation", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_3), QCoreApplication.translate("MainWindow", u"Simulation", None))
     # retranslateUi
 

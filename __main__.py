@@ -5,7 +5,7 @@ import datetime
 from PySide6.QtWidgets import QApplication, QMainWindow, QFileDialog, QHeaderView, QHBoxLayout, QTableWidgetItem
 from PySide6.QtCore import QFile
 from gui.stocker import Ui_MainWindow
-from data_collector import collect_data2
+from data_collector import *
 from random import random
 from gui.myChart import MyChart
 from ai.constants import *
@@ -38,6 +38,7 @@ class MainWindow(QMainWindow):
         for line in iter(process.stdout.readline, ''):
             self.ui.trainingTextBrowser.append(line[:-1])
             QApplication.processEvents()
+        self.ui.trainingTextBrowser.append("DONE!")
         self.run = False
     
         
@@ -59,19 +60,28 @@ class MainWindow(QMainWindow):
         stock_name = self.ui.predictingStockNameLineEdit.text()
         nn_file = self.ui.predictingChosenNNLineEdit.text()
 
-        filename = collect_data2(stock_name, datetime.datetime.now() - datetime.timedelta(days=70), datetime.datetime.now(), interval="1d")
+        filename,historicalData = collect_data3(stock_name, datetime.datetime.now() - datetime.timedelta(days=70), datetime.datetime.now(), interval="1d")
 
-        print(f"Predicting next days for {filename} based on model {nn_file}")
-        values = [predict_single(filename,nn_file)]
-        #values = [(random()-0.5)*1000.0 for _ in range(5)]
+        print(f"Predicting next day for {filename} based on model {nn_file}")
+        value = []
+        value[0] = historicalData.Close[-2]
+        value[1] = historicalData.Close[-1]
+        dates = []
+        dates[0] = str(historicalData.index[-2]).split(" ")[0]
+        dates[1] = str(historicalData.index[-1]).split(" ")[0]
+        dates[2] = str(datetime.datetime.now())
 
-        today = datetime.datetime.now() + datetime.timedelta(days=1)
-        for i in range(0, 1):
-            self.ui.tabela.setHorizontalHeaderItem(i, QTableWidgetItem(str(today.day)+'/'+str(today.month)+'/'+str(today.year)))
-            today = today + datetime.timedelta(days=1)
+        value[2] = predict_single(filename,nn_file)
+        for i in range(0,3):
+            self.ui.tabela.setItem(0, i, QTableWidgetItem(str(dates[i])))
+            self.ui.tabela.setItem(1, i, QTableWidgetItem(str(value[i])))
 
-        for i in range(0, 1):
-            self.ui.tabela.setItem(0, i, QTableWidgetItem(str(values[i])))
+        # for i in range(0, 1):
+        #     self.ui.tabela.setHorizontalHeaderItem(i, QTableWidgetItem(str(today.day)+'/'+str(today.month)+'/'+str(today.year)))
+        #     today = today + datetime.timedelta(days=1)
+
+        # for i in range(0, 1):
+        #     self.ui.tabela.setItem(0, i, QTableWidgetItem(str(values[i])))
 
 
 if __name__ == "__main__":
